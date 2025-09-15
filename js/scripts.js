@@ -208,6 +208,7 @@
   try {
     const response = await fetch('https://script.google.com/macros/s/AKfycbyBTUXAJtYjB1dfewWNSsxcrnlYwXrG4bEorMDW_OlZTgMqtI_7NCsTifkhbZoc4KwYaQ/exec', {
       method: 'POST',
+      redirect: "follow", 
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(feedbackData)
     });
