@@ -195,6 +195,7 @@
       jsonOutput.style.display = 'block';
     }
 
+    /*
     async function submitFeedback() {
       const loading = document.getElementById('loading');
       const submitBtn = document.getElementById('submitBtn');
@@ -241,6 +242,46 @@
         loading.style.display = 'none';
       }
     }
+      */
+
+     async function submitFeedback() {
+  const loading = document.getElementById('loading');
+  const submitBtn = document.getElementById('submitBtn');
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Submitting...';
+  loading.style.display = 'block';
+
+  const feedbackData = generateFeedbackJson();
+
+  try {
+    const response = await fetch('https://script.google.com/macros/s/AKfycbyW5Ou0Pn6WL_W3EmFEpaQNLjYnNqyS-W24w9BgBHTlWqK7xDZZVzoVzgCs5ZtSHX-t/exec', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(feedbackData)
+    });
+
+    const result = await response.json();
+    if(result.status === "success"){
+      // Show thank you step
+      document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
+      document.getElementById('thankYou').classList.add('active');
+      document.querySelector('.navigation').style.display = 'none';
+
+      setTimeout(() => location.reload(), 5000);
+    } else {
+      throw new Error(result.message);
+    }
+
+  } catch (error) {
+    console.error('Submission error:', error);
+    alert('Submission failed. Please try again.');
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Submit 🚀';
+  } finally {
+    loading.style.display = 'none';
+  }
+}
 
     // Initialize the form
     updateProgress();
