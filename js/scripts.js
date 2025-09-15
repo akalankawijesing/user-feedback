@@ -255,7 +255,7 @@
   const feedbackData = generateFeedbackJson();
 
   try {
-    const response = await fetch('https://script.google.com/macros/s/AKfycbyW5Ou0Pn6WL_W3EmFEpaQNLjYnNqyS-W24w9BgBHTlWqK7xDZZVzoVzgCs5ZtSHX-t/exec', {
+    const response = await fetch('https://script.google.com/macros/s/AKfycbyBTUXAJtYjB1dfewWNSsxcrnlYwXrG4bEorMDW_OlZTgMqtI_7NCsTifkhbZoc4KwYaQ/exec', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(feedbackData)
